@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Badminton Team Generator</title>
+    
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <link 
+        rel="stylesheet" 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
+        crossorigin="anonymous">
+
+</head>
+
+<body class="bg-gradient-primary">
+
+    <div class="container px-1">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="py-5 px-4">
+                            <div>
+                                <div class="alert alert-success .alert-success" hidden></div>
+                                <div class="alert alert-danger .alert-danger" hidden></div>
+                            </div>
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Badminton Team Generator</h1>
+                                <p>
+                                    Tepak Tepok Bulu Tangkis Warga Discord.
+                                </p>
+                            </div>
+                            <div class="text-center">
+                                <h6>
+                                    Wasit : <b id="wasit_name"></b>
+                                </h6>
+                                <table class="table table-bordered text-center" id="table-match">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="3">MATCH</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       
+                                    </tbody>
+                                </table>
+                                
+                                
+                                
+                            </div>
+                            <form class="user" action="" method="GET" enctype="multipart/form-data" id="generate-form">
+                                <label for="">
+                                    <b>Pilih Pemain</b> - <span class="badge badge-info" type="button" onclick="$('.select_player').prop('checked', false)">reset</span>
+                                </label>
+                                <div class="form-group row mx-3" id="player-list">
+
+                                        <!-- <div class="col-sm-4 form-check">    
+                                            <input class="form-check-input select_player" type="checkbox" name="player[]">
+                                            <label class="form-check-label" for="flexCheckChecked">
+                                                
+                                            </label>
+                                        </div> -->
+                                </div>
+                                                            
+                                <button type="submit" class="btn btn-primary btn-user btn-block rounded-pill mt-4" id="submit_form" onclick="$('#image_hompimpa').removeAttr('hidden')">
+                                    Generate
+                                </button>
+                            </form>
+                            <a class="btn btn-secondary btn-user btn-block rounded-pill mt-4" data-toggle="modal" data-target="#exampleModal" target="_blank">
+                                <i class="fas fa-video pr-2"></i> Video badminton.exe
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>  
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="exampleModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="preview_title">Badminton.exe - Tepak Tepok Bulu Tangkis</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="text-align: center;">
+                    <!-- <iframe style="widtH: 100%; min-height: 200px;" src="https://www.youtube.com/embed/videoseries?list=PLvOc3QCdbxlhjhb3xvphLejzNfAP-SucQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script src="bundle/app.js"></script>
+    <script>
+
+        // player = [
+        //     'Yoss',
+        //     'Aip',
+        //     'Pahlev',
+        //     'Opan',
+        //     'Imam'
+        // ];
+
+        // function appendPlayer(){
+        //     return_html = '';
+        //     for (let index = 0; index < player.length; index++) {
+        //         name = player[index];
+        //         html = `<div class="col-sm-4 form-check">    
+        //             <input class="form-check-input select_player" type="checkbox" name="player[]" value="${name}">
+        //             <label class="form-check-label" for="flexCheckChecked">
+        //             ${name}
+        //             </label>
+        //         </div>`;
+        //         return_html += html;
+        //     }
+            
+        //     console.log(return_html);
+        //     player_list = document.getElementById("player-list");
+        //     player_list.innerHTML = return_html;
+        // }
+
+        // window.onload = function (){
+        //     appendPlayer();
+        // };
+        
+        // $(document).ready(function() {
+            // $('.example-basic-multiple').select2();
+            // playing_members = {};
+            // console.log(playing_members);
+            // // $("#select_player").val(playing_members).trigger('change');
+            // if(playing_members != null){
+            //     $(".select_player").val(playing_members).attr('checked', true);
+            // } else {
+            //     $(".select_player").prop('checked', true);
+            // }
+
+        // });
+
+    </script>
+
+</html>

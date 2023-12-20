@@ -1,8 +1,7 @@
 "use strict";
 let html_id = "player-list";
-let wasit = "";
-let all_match = [];
-let players = [
+let players = [];
+let all_players = [
     'Yoss',
     'Aip',
     'Pahlev',
@@ -13,14 +12,14 @@ let players = [
     'Ryan',
     'Rivaldi'
 ];
-function initiatePlayer(players) {
+function initiatePlayer(all_players) {
     let html;
     let player_name;
     let return_html = "";
-    for (let index = 0; index < players.length; index++) {
-        player_name = players[index];
+    for (let index = 0; index < all_players.length; index++) {
+        player_name = all_players[index];
         html = `<div class="col-sm-4 form-check">    
-            <input class="form-check-input select_player" type="checkbox" name="player[]" value="${player_name}">
+            <input class="form-check-input select-player" type="checkbox" name="player[]" value="${player_name}">
             <label class="form-check-label" for="flexCheckChecked">
             ${player_name}
             </label>
@@ -33,12 +32,15 @@ function insertToHtml(html_id, html) {
     var player_list = document.getElementById(html_id);
     player_list.innerHTML = html;
 }
-function generateMatch(players) {
+function generateMatch() {
+    let wasit = "";
+    let all_match = [];
+    let players_only = [...players];
     // set wasit
-    if (players.length % 2 != 0) {
-        let pop = Math.floor((Math.random() * (players.length - 1)));
+    if (players_only.length % 2 != 0) {
+        let pop = Math.floor((Math.random() * (players_only.length - 1)));
         wasit = players[pop];
-        players.splice(pop, 1);
+        players_only.splice(pop, 1);
     }
     else {
         wasit = '-';
@@ -51,25 +53,26 @@ function generateMatch(players) {
         }
         return array;
     };
-    if (players.length > 0) {
-        shuffle(players);
+    all_match = [];
+    if (players_only.length > 0) {
+        shuffle(players_only);
         let counter = 1;
         let p = [];
-        for (let i = 0; i < players.length; i++) {
+        for (let i = 0; i < players_only.length; i++) {
             counter++;
             if (counter <= 2) {
-                p[0] = players[i];
+                p[0] = players_only[i];
             }
             else {
-                p[1] = players[i];
+                p[1] = players_only[i];
                 all_match.push({ player1: p[0], player2: p[1] });
                 counter = 1;
             }
         }
     }
-    console.log([`players:`, players]);
+    insertMatch(wasit, all_match);
 }
-function insertMatch() {
+function insertMatch(wasit, all_match) {
     let html = "";
     if (all_match.length == 0) {
         console.log('match not found!');
@@ -141,14 +144,30 @@ function insertMatch() {
     let table = document.getElementById(`table-match`).getElementsByTagName('tbody')[0];
     table.innerHTML = html;
 }
+function generate() {
+    let checkboxes = document.querySelectorAll('.select-player');
+    let checkboxesChecked = [];
+    for (var i = 0; i < checkboxes.length; i++) {
+        // And stick the checked ones onto an array...
+        if (checkboxes[i].checked) {
+            checkboxesChecked.push(checkboxes[i].value);
+        }
+    }
+    // console.log(checkboxesChecked.length);
+    if (checkboxesChecked.length > 1) {
+        players = checkboxesChecked;
+    }
+    else {
+        players = all_players;
+    }
+    generateMatch();
+}
 if (typeof window !== "undefined") {
     window.onload = function () {
         //ininitate player list
-        let html = initiatePlayer(players);
+        let html = initiatePlayer(all_players);
         insertToHtml(html_id, html);
         console.log('generate player executed!');
-        generateMatch(players);
-        console.log(all_match);
-        insertMatch();
+        // generateMatch(players);
     };
 }

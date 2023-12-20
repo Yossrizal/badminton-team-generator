@@ -99,7 +99,7 @@ function insertMatch(wasit: string, all_match: Array<Match>): void
     html += `<table class="table table-bordered text-center">`;
     html += `<thead>
                 <tr>
-                    <th colspan="3">Wasit: ${wasit}</th>
+                    <th colspan="3">Referee: ${wasit}</th>
                 </tr>
             </thead>`;
 

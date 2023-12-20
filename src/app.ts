@@ -14,7 +14,8 @@ let all_players: Array<string> = [
     'Riyadi',
     'Ridwan',
     'Ryan',
-    'Rivaldi'
+    'Rivaldi',
+    'Hudos'
 ];
 
 function initiatePlayer(all_players: Array<string>): string
@@ -26,7 +27,7 @@ function initiatePlayer(all_players: Array<string>): string
     for (let index = 0; index < all_players.length; index++) {
         player_name = all_players[index];
         html = `<div class="col-sm-4 form-check">    
-            <input class="form-check-input select-player" type="checkbox" name="player[]" value="${player_name}">
+            <input class="form-check-input select-player" type="checkbox" name="player[]" value="${player_name}" checked>
             <label class="form-check-label" for="flexCheckChecked">
             ${player_name}
             </label>
@@ -92,6 +93,12 @@ function insertMatch(wasit: string, all_match: Array<Match>): void
 {
     
     let html: string = "";
+    html += `<table class="table table-bordered text-center">`;
+    html += `<thead>
+                <tr>
+                    <th colspan="3">Wasit: ${wasit}</th>
+                </tr>
+            </thead>`;
 
     if(all_match.length == 0){
         console.log('match not found!');
@@ -102,7 +109,7 @@ function insertMatch(wasit: string, all_match: Array<Match>): void
         let round: number = 1;
         let count: number = 1;
         let close: boolean = true;
-
+        html += `<tbody>`;
         for (let index = 0; index < all_match.length; index++) {
             const p1 = all_match[index].player1;
             const p2 = all_match[index].player2;
@@ -161,11 +168,8 @@ function insertMatch(wasit: string, all_match: Array<Match>): void
                     </td>    
                 </tr>`;
     }
-
-    let was = document.getElementById('wasit_name') as HTMLElement;
-    was.innerHTML = wasit;
-    let table = document.getElementById(`table-match`)!.getElementsByTagName('tbody')[0];
-    table.innerHTML = html;
+    html += `</tbody></table>`;
+    insertToHtml(`table-div`,html);
 }
 
 function generate()
@@ -185,16 +189,20 @@ function generate()
         players = all_players;
     }
     generateMatch();
+
+    return 'test';
     
 }
 
 if (typeof window !== "undefined") {
     window.onload = function (){
-        //ininitate player list
+        // ininitate player list
         let html = initiatePlayer(all_players);
         insertToHtml(html_id,html);
-        console.log('generate player executed!');
-        // generateMatch(players);
+
+        // generate button
+        let gen_btn = document.getElementById('generate_btn') as HTMLElement;
+        gen_btn.onclick=function(){generate()}
     };
 }
 

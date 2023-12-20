@@ -10,7 +10,8 @@ let all_players = [
     'Riyadi',
     'Ridwan',
     'Ryan',
-    'Rivaldi'
+    'Rivaldi',
+    'Hudos'
 ];
 function initiatePlayer(all_players) {
     let html;
@@ -19,7 +20,7 @@ function initiatePlayer(all_players) {
     for (let index = 0; index < all_players.length; index++) {
         player_name = all_players[index];
         html = `<div class="col-sm-4 form-check">    
-            <input class="form-check-input select-player" type="checkbox" name="player[]" value="${player_name}">
+            <input class="form-check-input select-player" type="checkbox" name="player[]" value="${player_name}" checked>
             <label class="form-check-label" for="flexCheckChecked">
             ${player_name}
             </label>
@@ -74,6 +75,12 @@ function generateMatch() {
 }
 function insertMatch(wasit, all_match) {
     let html = "";
+    html += `<table class="table table-bordered text-center">`;
+    html += `<thead>
+                <tr>
+                    <th colspan="3">Wasit: ${wasit}</th>
+                </tr>
+            </thead>`;
     if (all_match.length == 0) {
         console.log('match not found!');
     }
@@ -81,6 +88,7 @@ function insertMatch(wasit, all_match) {
         let round = 1;
         let count = 1;
         let close = true;
+        html += `<tbody>`;
         for (let index = 0; index < all_match.length; index++) {
             const p1 = all_match[index].player1;
             const p2 = all_match[index].player2;
@@ -139,10 +147,8 @@ function insertMatch(wasit, all_match) {
                     </td>    
                 </tr>`;
     }
-    let was = document.getElementById('wasit_name');
-    was.innerHTML = wasit;
-    let table = document.getElementById(`table-match`).getElementsByTagName('tbody')[0];
-    table.innerHTML = html;
+    html += `</tbody></table>`;
+    insertToHtml(`table-div`, html);
 }
 function generate() {
     let checkboxes = document.querySelectorAll('.select-player');
@@ -161,13 +167,15 @@ function generate() {
         players = all_players;
     }
     generateMatch();
+    return 'test';
 }
 if (typeof window !== "undefined") {
     window.onload = function () {
-        //ininitate player list
+        // ininitate player list
         let html = initiatePlayer(all_players);
         insertToHtml(html_id, html);
-        console.log('generate player executed!');
-        // generateMatch(players);
+        // generate button
+        let gen_btn = document.getElementById('generate_btn');
+        gen_btn.onclick = function () { generate(); };
     };
 }

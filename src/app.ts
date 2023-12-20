@@ -3,19 +3,22 @@ interface Match {
     player2: string;
 }
 
-let html_id: string = "player-list";
 let players: Array<string> = [];
 let all_players: Array<string> = [
-    'Yoss',
-    'Aip',
-    'Pahlev',
-    'Opan',
-    'Imam',
-    'Riyadi',
-    'Ridwan',
-    'Ryan',
-    'Valdi',
-    'Hudos'
+    "Maksymilian",
+    "Herman",
+    "Fletcher",
+    "Ronnie",
+    "Kieron",
+    "Nana",
+    "Aarav",
+    "Kallum",
+    "Jamal",
+    "Ismael",
+    "Cassius",
+    "Adil",
+    "Maxim",
+    "Ivan"
 ];
 
 function initiatePlayer(all_players: Array<string>): string
@@ -26,9 +29,9 @@ function initiatePlayer(all_players: Array<string>): string
 
     for (let index = 0; index < all_players.length; index++) {
         player_name = all_players[index];
-        html = `<div class="col-sm-3 form-check">    
-            <input class="form-check-input select-player" type="checkbox" name="player[]" value="${player_name}" checked>
-            <label class="form-check-label" for="flexCheckChecked">
+        html = `<div class="col-sm-3">    
+            <input class=" select-player" type="checkbox" name="player[]" value="${player_name}" checked>
+            <label class="" for="flexCheckChecked">
             ${player_name}
             </label>
         </div>`;
@@ -117,21 +120,21 @@ function insertMatch(wasit: string, all_match: Array<Match>): void
             if(count == 1){
                 html += `
                     <tr>
-                        <td>
-                            <span style="font-size: 0.6em;">TEAM ${index+1}</span><br>
-                            <b style="font-size: 0.8em;">${p1} & ${p2}</b>
+                        <td style="width: 35%;">
+                            <h6>TEAM ${index+1}</h6>
+                            <label>${p1} & ${p2}</label>
                         </td>`;
                 count++;
                 close = false;
             } else if(count == 2){
                 html += `
                         <td>
-                            <span style="font-size: 0.6em;">MATCH ${round}</span><br>
-                            <span class="badge badge-danger">VS</span>
+                            <h6>MATCH ${round}</h6>
+                            <span class="badge bg-danger">VS</span>
                         </td>
-                        <td>
-                            <span style="font-size: 0.6em;">TEAM ${index+1}</span><br>
-                            <b style="font-size: 0.8em;">${p1} & ${p2}</b>
+                        <td style="width: 35%;">
+                            <h6>TEAM ${index+1}</h6>
+                            <label>${p1} & ${p2}</label>
                         </td>    
                     </tr>`;
                 count = 1;
@@ -143,11 +146,11 @@ function insertMatch(wasit: string, all_match: Array<Match>): void
         if(close == false){
             html += `
                     <td>
-                        <span style="font-size: 0.6em;">FINAL MATCH</span><br>
-                        <span class="badge badge-danger">VS</span>
+                        <h6>FINAL MATCH</h6>
+                        <span class="badge bg-danger">VS</span>
                     </td>
-                    <td>
-                        <span style="font-size: 0.6em;">?</span><br>
+                    <td style="width: 35%;">
+                        <span>?</span><br>
                         -
                     </td>    
                 </tr>`;
@@ -155,15 +158,15 @@ function insertMatch(wasit: string, all_match: Array<Match>): void
     } else {
         html += `<tr>
                     <td>
-                        <span style="font-size: 0.6em;">SOLO</span><br>
+                        <h6>SOLO</h6>
                         <b>${all_match[0].player1}</b>
                     </td> 
                     <td>
-                        <span style="font-size: 0.6em;">MATCH 1</span><br>
+                        <h6>MATCH 1</span><br>
                         <span class="badge badge-danger">VS</span>
                     </td>
                     <td>
-                        <span style="font-size: 0.6em;">SOLO</span><br>
+                        <h6>SOLO</span><br>
                         <b>${all_match[0].player2}</b>
                     </td>    
                 </tr>`;
@@ -189,29 +192,42 @@ function generate()
         players = all_players;
         let checkbox_input = document.getElementsByClassName(`select-player`) as HTMLCollection;
         for (let index = 0; index < checkbox_input.length; index++) {
-            checkbox_input[index].setAttribute(`checked`,`checked`);
+            checkbox_input[index].setAttribute(`checked`, `true`);
+            console.log(checkbox_input[index]);
         }
     }
     generateMatch();
 }
 
+function docReady(fn: any) {
+    // see if DOM is already available
+    if (document.readyState === "complete" || document.readyState === "interactive") {
+        // call on next available tick
+        setTimeout(fn, 1);
+    } else {
+        document.addEventListener("DOMContentLoaded", fn);
+    }
+}    
+
 if (typeof window !== "undefined") {
     window.onload = function (){
-        // ininitate player list
-        let html = initiatePlayer(all_players);
-        insertToHtml(html_id,html);
+        
+        docReady(function() {
+            
+            // ininitate player list
+            let html = initiatePlayer(all_players);
+            insertToHtml(`player-list`,html);
+            
+            // generate button
+            let gen_btn = document.getElementById(`generate_btn`) as HTMLElement;
+            gen_btn.onclick=function(){generate()};
 
-        // generate button
-        let gen_btn = document.getElementById(`generate_btn`) as HTMLElement;
-        gen_btn.onclick=function(){generate()};
-
-        let res_btn = document.getElementById(`reset_btn`) as HTMLElement;
-        res_btn.onclick=function(){
-            let checkbox_input = document.getElementsByClassName(`select-player`) as HTMLCollection;
-            for (let index = 0; index < checkbox_input.length; index++) {
-                checkbox_input[index].removeAttribute(`checked`);
-            }
-        };
+            let res_btn = document.getElementById(`reset_btn`) as HTMLElement;
+            res_btn.onclick=function(){
+                insertToHtml(`player-list`, html);
+                insertToHtml(`table-div`, ``);
+            };
+        });
     };
 }
 

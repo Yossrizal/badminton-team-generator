@@ -20,6 +20,18 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
         crossorigin="anonymous">
 
+    <style>
+        table td label {
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        table td h6 {
+            font-size: 0.7em;
+            font-weight: 500;
+        }
+    </style>
+
 </head>
 
 <body class="bg-gradient-primary">
@@ -37,24 +49,28 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Badminton Team Generator</h1>
                                 <p>
-                                    Tepak Tepok Bulu Tangkis Warga Discord.
+                                    <i>Warga Discord</i> Badminton Fun.
                                 </p>
                             </div>
                             <label for="">
-                                <b>Pilih Pemain</b>
+                                <b>Select Player</b>
                             </label>
                             <div class="form-group row mx-3" id="player-list">
 
                                     
                             </div>
                                                         
-                            <div class="text-center">
-                                <button type="button" class="btn btn-danger rounded-pill mt-4" id="reset_btn">
-                                    Reset Players
-                                </button>
-                                <button type="button" class="btn btn-primary rounded-pill mt-4" id="generate_btn">
-                                    Generate Match
-                                </button>
+                            <div class="row text-center">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-danger w-100 rounded-pill mt-4" id="reset_btn">
+                                        Reset Players
+                                    </button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-primary w-100 rounded-pill mt-4" id="generate_btn">
+                                        Generate Match
+                                    </button>
+                                </div>
                             </div>
                             
                             <div class="text-center my-4" id="table-div">

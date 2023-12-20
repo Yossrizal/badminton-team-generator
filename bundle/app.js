@@ -10,7 +10,7 @@ let all_players = [
     'Riyadi',
     'Ridwan',
     'Ryan',
-    'Rivaldi',
+    'Valdi',
     'Hudos'
 ];
 function initiatePlayer(all_players) {
@@ -19,7 +19,7 @@ function initiatePlayer(all_players) {
     let return_html = "";
     for (let index = 0; index < all_players.length; index++) {
         player_name = all_players[index];
-        html = `<div class="col-sm-4 form-check">    
+        html = `<div class="col-sm-3 form-check">    
             <input class="form-check-input select-player" type="checkbox" name="player[]" value="${player_name}" checked>
             <label class="form-check-label" for="flexCheckChecked">
             ${player_name}
@@ -165,9 +165,12 @@ function generate() {
     }
     else {
         players = all_players;
+        let checkbox_input = document.getElementsByClassName(`select-player`);
+        for (let index = 0; index < checkbox_input.length; index++) {
+            checkbox_input[index].setAttribute(`checked`, `checked`);
+        }
     }
     generateMatch();
-    return 'test';
 }
 if (typeof window !== "undefined") {
     window.onload = function () {
@@ -175,7 +178,14 @@ if (typeof window !== "undefined") {
         let html = initiatePlayer(all_players);
         insertToHtml(html_id, html);
         // generate button
-        let gen_btn = document.getElementById('generate_btn');
+        let gen_btn = document.getElementById(`generate_btn`);
         gen_btn.onclick = function () { generate(); };
+        let res_btn = document.getElementById(`reset_btn`);
+        res_btn.onclick = function () {
+            let checkbox_input = document.getElementsByClassName(`select-player`);
+            for (let index = 0; index < checkbox_input.length; index++) {
+                checkbox_input[index].removeAttribute(`checked`);
+            }
+        };
     };
 }

@@ -41,7 +41,7 @@
                                 </p>
                             </div>
                             <label for="">
-                                <b>Pilih Pemain</b> - <span class="badge badge-info" type="button" onclick="$('.select_player').prop('checked', false)">reset</span>
+                                <b>Pilih Pemain</b>
                             </label>
                             <div class="form-group row mx-3" id="player-list">
 
@@ -49,8 +49,11 @@
                             </div>
                                                         
                             <div class="text-center">
-                                <button type="button" class="btn btn-primary btn-user btn-block rounded-pill mt-4" id="generate_btn">
-                                    Generate
+                                <button type="button" class="btn btn-danger rounded-pill mt-4" id="reset_btn">
+                                    Reset Players
+                                </button>
+                                <button type="button" class="btn btn-primary rounded-pill mt-4" id="generate_btn">
+                                    Generate Match
                                 </button>
                             </div>
                             
@@ -71,9 +74,9 @@
     </div>  
 </body>
 
-    <script src="https://unpkg.com/htmx.org@1.9.9" integrity="sha384-QFjmbokDn2DjBjq+fM+8LUIVrAgqcNW2s0PjAxHETgRn9l4fvX31ZxDxvwQnyMOX" crossorigin="anonymous"></script>
-    <!-- Bootstrap core JavaScript-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
-    <script src="bundle/app.js"></script>
+<script src="https://unpkg.com/htmx.org@1.9.9" integrity="sha384-QFjmbokDn2DjBjq+fM+8LUIVrAgqcNW2s0PjAxHETgRn9l4fvX31ZxDxvwQnyMOX" crossorigin="anonymous"></script>
+<!-- Bootstrap core JavaScript-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+<script src="bundle/app.js"></script>
 
 </html>
